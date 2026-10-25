@@ -1,0 +1,95 @@
+<div class="site-header" id="main-site-header">
+  <div class="container navbar-inner">
+    <!-- Brand Logo -->
+    <a href="home.html" class="brand" aria-label="Habitex Home">
+      <div class="brand-symbol">
+        <img src="assets/icons/logo.svg" alt="Habitex Logo" width="38" height="38">
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">HABITEX</span>
+        <span class="brand-tagline">discover where you belong</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Menu -->
+    <nav class="nav-desktop" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="home.html" class="nav-link" data-page="home">Home</a></li>
+        <li class="nav-item"><a href="properties.html?listingType=Sale" class="nav-link" data-page="buy">Buy</a></li>
+        <li class="nav-item"><a href="properties.html?listingType=Rent" class="nav-link" data-page="rent">Rent</a></li>
+        <li class="nav-item"><a href="add-property.html" class="nav-link" data-page="add-property">Sell</a></li>
+        <li class="nav-item"><a href="enquiry.html" class="nav-link" data-page="enquiry">Enquiries</a></li>
+        <li class="nav-item">
+          <a href="saved-properties.html" class="nav-link" data-page="saved">
+            Saved
+            <span class="nav-badge-count" id="nav-saved-count">0</span>
+          </a>
+        </li>
+        <li class="nav-item"><a href="dashboard.html" class="nav-link" data-page="dashboard">Dashboard</a></li>
+      </ul>
+    </nav>
+
+    <!-- Navigation Right Actions -->
+    <div class="nav-actions">
+      <a href="add-property.html" class="btn btn-primary btn-sm btn-list-property">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <span>List Property</span>
+      </a>
+
+      <!-- Auth State Container (Hydrated by navbar.js) -->
+      <div class="nav-auth-wrap" id="nav-auth-container">
+        <a href="login.html" class="btn btn-secondary btn-sm" id="nav-login-btn">Log In</a>
+        <a href="register.html" class="btn btn-outline btn-sm" id="nav-register-btn">Register</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-toggle-btn" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+<div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation" role="dialog" aria-modal="true">
+  <div class="mobile-drawer-header">
+    <a href="home.html" class="brand">
+      <div class="brand-symbol">
+        <img src="assets/icons/logo.svg" alt="Habitex Logo" width="38" height="38">
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">HABITEX</span>
+        <span class="brand-tagline">discover where you belong</span>
+      </div>
+    </a>
+    <button class="btn-icon-only btn-ghost" id="mobile-menu-close" aria-label="Close menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+
+  <div class="mobile-drawer-body">
+    <ul class="mobile-nav-list">
+      <li><a href="home.html" class="nav-link" data-page="home">Home</a></li>
+      <li><a href="properties.html?listingType=Sale" class="nav-link" data-page="buy">Buy Properties</a></li>
+      <li><a href="properties.html?listingType=Rent" class="nav-link" data-page="rent">Rent Properties</a></li>
+      <li><a href="add-property.html" class="nav-link" data-page="add-property">List a Property</a></li>
+      <li><a href="enquiry.html" class="nav-link" data-page="enquiry">Enquiries</a></li>
+      <li><a href="saved-properties.html" class="nav-link" data-page="saved">Saved Properties (<span class="mobile-saved-count">0</span>)</a></li>
+      <li><a href="dashboard.html" class="nav-link" data-page="dashboard">My Dashboard</a></li>
+      <li><a href="my-listings.html" class="nav-link" data-page="my-listings">My Listings</a></li>
+      <li><a href="performance.html" class="nav-link" data-page="performance">Performance Lab</a></li>
+      <li><a href="profile.html" class="nav-link" data-page="profile">Profile Settings</a></li>
+    </ul>
+  </div>
+
+  <div class="mobile-drawer-footer" id="mobile-auth-footer">
+    <!-- Populated dynamically by navbar.js -->
+    <a href="login.html" class="btn btn-secondary w-100">Log In</a>
+    <a href="register.html" class="btn btn-primary w-100">Create Account</a>
+  </div>
+</div>

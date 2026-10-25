@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signed Out Securely — Habitex</title>
+  <meta name="description" content="You have been safely signed out of your Habitex account. Discover where you belong.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main">
+    <div class="logout-card-wrapper">
+      <div class="logout-card">
+        <!-- Security Sign-Out Icon Badge -->
+        <div class="logout-icon-wrap" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </div>
+
+        <div class="logout-eyebrow">Session Terminated</div>
+        <h1 class="logout-title">You Have Been Signed Out</h1>
+        <p class="logout-subtitle">
+          Your authenticated session has been safely closed. Personal account details and portfolio dockets are now protected. Discover where you belong.
+        </p>
+
+        <!-- Account Summary Info Strip -->
+        <div class="logout-account-info" id="logout-account-box">
+          <div class="logout-account-avatar" id="logout-avatar">Y</div>
+          <div class="logout-account-details">
+            <div class="logout-account-name" id="logout-name">Yatharth</div>
+            <div class="logout-account-email" id="logout-email">yatharth@habitex.in</div>
+          </div>
+          <span class="badge badge-featured" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Signed Out</span>
+        </div>
+
+        <!-- Primary Actions -->
+        <div class="logout-actions">
+          <a href="login.html" class="btn btn-primary btn-lg w-100">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            <span>Sign In Again</span>
+          </a>
+          <a href="home.html" class="btn btn-secondary btn-lg w-100">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Return to Marketplace</span>
+          </a>
+          <a href="properties.html" class="btn btn-outline btn-sm w-100">
+            <span>Explore Premier Properties</span>
+          </a>
+        </div>
+
+        <!-- Automatic Redirect Countdown -->
+        <div class="logout-countdown-section">
+          <div class="logout-countdown-row">
+            <span>Redirecting to marketplace in <strong id="countdown-sec" style="color:var(--color-primary);">6</strong>s...</span>
+            <button type="button" class="logout-pause-btn" id="toggle-countdown-btn">Pause</button>
+          </div>
+          <div class="logout-progress-track">
+            <div class="logout-progress-bar" id="logout-progress-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Record and clean up session
+      const lastUserRaw = localStorage.getItem("estatecraft_last_logged_out_user");
+      let lastUser = null;
+      if (lastUserRaw) {
+        try { lastUser = JSON.parse(lastUserRaw); } catch(e) {}
+      }
+
+      // If active session still existed upon loading this page directly, terminate it now
+      if (window.AuthManager && window.AuthManager.isLoggedIn()) {
+        lastUser = window.AuthManager.getUser();
+        window.AuthManager.logout(null); // logout without redirect loop
+      } else {
+        localStorage.setItem("estatecraft_logged_out", "true");
+        localStorage.removeItem("estatecraft_current_user");
+        window.dispatchEvent(new CustomEvent("estatecraft-auth-changed", { detail: { user: null } }));
+      }
+
+      // Populate UI with signed out user credentials
+      const nameEl = document.getElementById("logout-name");
+      const emailEl = document.getElementById("logout-email");
+      const avatarEl = document.getElementById("logout-avatar");
+
+      if (lastUser) {
+        if (nameEl) nameEl.textContent = lastUser.name || "Yatharth";
+        if (emailEl) emailEl.textContent = lastUser.email || "yatharth@habitex.in";
+        if (avatarEl) {
+          const initials = (lastUser.name || "Y").split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
+          avatarEl.textContent = initials;
+        }
+      }
+
+      // Show toast confirmation
+      if (window.showToast) {
+        window.showToast("Signed out successfully. Session closed.", "info", 3000);
+      }
+
+      // Auto-redirect timer with progress bar (6 seconds)
+      let secondsLeft = 6;
+      let isPaused = false;
+      const countEl = document.getElementById("countdown-sec");
+      const barEl = document.getElementById("logout-progress-bar");
+      const pauseBtn = document.getElementById("toggle-countdown-btn");
+
+      const interval = setInterval(() => {
+        if (isPaused) return;
+        secondsLeft--;
+        if (countEl) countEl.textContent = secondsLeft;
+        if (barEl) {
+          const percent = (secondsLeft / 6) * 100;
+          barEl.style.width = `${percent}%`;
+        }
+
+        if (secondsLeft <= 0) {
+          clearInterval(interval);
+          window.location.href = "home.html";
+        }
+      }, 1000);
+
+      if (pauseBtn) {
+        pauseBtn.addEventListener("click", () => {
+          isPaused = !isPaused;
+          pauseBtn.textContent = isPaused ? "Resume" : "Pause";
+          if (isPaused) {
+            pauseBtn.style.color = "var(--color-accent)";
+          } else {
+            pauseBtn.style.color = "var(--color-primary)";
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

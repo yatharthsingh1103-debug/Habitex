@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List Your Property — Habitex</title>
+  <meta name="description" content="Publish an architectural property listing on Habitex. Discover where you belong.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main form-page-layout">
+    <div class="container container-form">
+      <!-- Page Header -->
+      <div class="form-page-header">
+        <h1 class="form-page-title">Publish Architectural Holding</h1>
+        <p class="form-page-subtitle">
+          Complete the 8-stage verification dossier. Progress is autosaved in real-time to your local session.
+        </p>
+      </div>
+
+      <!-- Draft Status Banner -->
+      <div class="draft-status-banner" id="draft-status-banner">
+        <div class="draft-info">
+          <span class="draft-indicator-dot"></span>
+          <span id="draft-status-indicator">Initializing session...</span>
+        </div>
+        <div class="draft-actions">
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-manual-save-draft">Save Draft</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-discard-draft" style="color:var(--color-error);">Discard</button>
+        </div>
+      </div>
+
+      <!-- Existing Draft Detected Restore Banner -->
+      <div id="draft-restore-banner" style="display: none; background-color: var(--color-warning-bg); border: 1px solid #FCD34D; border-radius: var(--radius-sm); padding: var(--space-4); margin-bottom: var(--space-6); justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <strong style="color: var(--color-warning);">Unsaved Draft Detected:</strong>
+          <span style="font-size: 0.875rem; color: #78350F; margin-left: 0.25rem;">You have an in-progress property listing from a previous session.</span>
+        </div>
+        <div style="display: flex; gap: var(--space-2);">
+          <button type="button" class="btn btn-sm btn-primary" id="btn-restore-draft">Restore Draft</button>
+        </div>
+      </div>
+
+      <!-- Stepper Progress Header -->
+      <nav class="form-stepper" aria-label="Listing Form Stages">
+        <button type="button" class="step-indicator-item active" data-step="1">
+          <span class="step-badge-num">1</span>
+          <span>Basic Info</span>
+        </button>
+        <button type="button" class="step-indicator-item" data-step="2">
+          <span class="step-badge-num">2</span>
+          <span>Location</span>
+        </button>
+        <button type="button" class="step-indicator-item" data-step="3">
+          <span class="step-badge-num">3</span>
+          <span>Details</span>
+        </button>
+        <button type="button" class="step-indicator-item" data-step="4">
+          <span class="step-badge-num">4</span>
+          <span>Price</span>
+        </button>
+        <button type="button" class="step-indicator-item" data-step="5">
+          <span class="step-badge-num">5</span>
+          <span>Amenities</span>
+        </button>
+        <button type="button" class="step-indicator-item" data-step="6">
+          <span class="step-badge-num">6</span>
+          <span>Furnishing</span>
+        </button>
+        <button type="button" class="step-indicator-item" data-step="7">
+          <span class="step-badge-num">7</span>
+          <span>Contact</span>
+        </button>
+        <button type="button" class="step-indicator-item" data-step="8">
+          <span class="step-badge-num">8</span>
+          <span>Photos</span>
+        </button>
+      </nav>
+
+      <!-- Main Form Container -->
+      <div class="form-wizard-card">
+        <form id="add-property-form" novalidate>
+          <!-- ==========================================
+               SECTION 1: BASIC INFORMATION
+               ========================================== -->
+          <div class="form-section-pane active" id="step-pane-1">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 1: Basic Information</h2>
+              <p class="section-pane-desc">Core typology, title headline, and architectural positioning.</p>
+            </div>
+
+            <div class="form-grid-1">
+              <div class="form-field">
+                <label for="prop-title" class="form-label">
+                  Listing Headline Title <span class="required-mark">*</span>
+                </label>
+                <input type="text" id="prop-title" name="title" class="form-input" placeholder="e.g. 4 BHK Sea-Facing Penthouse with Private Plunge Pool" required minlength="10" maxlength="120">
+                <span class="form-hint">Provide an informative, architectural headline (min 10 characters).</span>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: var(--space-5);">
+              <!-- Listing Type -->
+              <div class="form-field">
+                <label class="form-label">Transaction Mode <span class="required-mark">*</span></label>
+                <div class="selectable-pills-row">
+                  <label class="pill-option-label">
+                    <input type="radio" name="listingType" value="Sale" checked>
+                    <span class="pill-option-chip">Sell / Outright</span>
+                  </label>
+                  <label class="pill-option-label">
+                    <input type="radio" name="listingType" value="Rent">
+                    <span class="pill-option-chip">Rent / Lease</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Property Type -->
+              <div class="form-field">
+                <label class="form-label">Property Typology <span class="required-mark">*</span></label>
+                <div class="selectable-pills-row">
+                  <label class="pill-option-label">
+                    <input type="radio" name="propertyType" value="Apartment" checked>
+                    <span class="pill-option-chip">Apartment</span>
+                  </label>
+                  <label class="pill-option-label">
+                    <input type="radio" name="propertyType" value="Villa">
+                    <span class="pill-option-chip">Villa</span>
+                  </label>
+                  <label class="pill-option-label">
+                    <input type="radio" name="propertyType" value="Penthouse">
+                    <span class="pill-option-chip">Penthouse</span>
+                  </label>
+                  <label class="pill-option-label">
+                    <input type="radio" name="propertyType" value="Plot">
+                    <span class="pill-option-chip">Plot</span>
+                  </label>
+                  <label class="pill-option-label">
+                    <input type="radio" name="propertyType" value="Commercial">
+                    <span class="pill-option-chip">Commercial</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: var(--space-5);">
+              <div class="form-field">
+                <label for="prop-purpose" class="form-label">Primary Purpose <span class="required-mark">*</span></label>
+                <select id="prop-purpose" name="purpose" class="form-select" required>
+                  <option value="Self-Occupancy">Primary Residence / Self-Occupancy</option>
+                  <option value="Investment / High-Yield Asset">Investment / High-Yield Asset</option>
+                  <option value="Vacation Retreat">Vacation Retreat / Second Home</option>
+                  <option value="Corporate Office">Corporate Office / Commercial HQ</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="prop-status" class="form-label">Construction Status <span class="required-mark">*</span></label>
+                <select id="prop-status" name="status" class="form-select" required>
+                  <option value="Ready to Move">Ready to Move</option>
+                  <option value="Under Construction">Under Construction</option>
+                  <option value="New Launch">New Launch</option>
+                  <option value="Resale Heritage">Resale Heritage</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field" style="margin-top: var(--space-5);">
+              <label for="prop-description" class="form-label">
+                Architectural Description <span class="required-mark">*</span>
+              </label>
+              <textarea id="prop-description" name="description" class="form-textarea" rows="4" placeholder="Detail the structural finishes, ceiling heights, light exposure, view lines, and developer credentials..." required minlength="30"></textarea>
+              <span class="form-hint">Minimum 30 characters required.</span>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SECTION 2: LOCATION
+               ========================================== -->
+          <div class="form-section-pane" id="step-pane-2">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 2: Location & Address</h2>
+              <p class="section-pane-desc">Precise cadastral address, postal coordinates, and enclave landmarks.</p>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label for="prop-unit" class="form-label">Unit / Flat / Villa No.</label>
+                <input type="text" id="prop-unit" name="unitNo" class="form-input" placeholder="e.g. Tower 2B, Penthouse 2801">
+              </div>
+
+              <div class="form-field">
+                <label for="prop-address" class="form-label">Building / Society / Enclave Name <span class="required-mark">*</span></label>
+                <input type="text" id="prop-address" name="address" class="form-input" placeholder="e.g. The Camellias / Carter Promenade" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-locality" class="form-label">Locality / Sector <span class="required-mark">*</span></label>
+                <input type="text" id="prop-locality" name="locality" class="form-input" placeholder="e.g. Golf Course Road / Bandra West" required>
+              </div>
+
+              <div class="form-field">
+                <label for="prop-city" class="form-label">City <span class="required-mark">*</span></label>
+                <select id="prop-city" name="city" class="form-select" required>
+                  <option value="Gurugram">Gurugram</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Bengaluru">Bengaluru</option>
+                  <option value="Pune">Pune</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="New Delhi">New Delhi</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-3" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-state" class="form-label">State <span class="required-mark">*</span></label>
+                <input type="text" id="prop-state" name="state" class="form-input" placeholder="e.g. Haryana / Maharashtra" required>
+              </div>
+
+              <div class="form-field">
+                <label for="prop-pincode" class="form-label">Postal Pincode (6 digits) <span class="required-mark">*</span></label>
+                <input type="text" id="prop-pincode" name="pincode" class="form-input" placeholder="e.g. 122002" required maxlength="6" data-validate="pincode">
+              </div>
+
+              <div class="form-field">
+                <label for="prop-country" class="form-label">Country</label>
+                <input type="text" id="prop-country" name="country" class="form-input" value="India" readonly disabled style="background-color: var(--color-surface-muted);">
+              </div>
+            </div>
+
+            <div class="form-field" style="margin-top: var(--space-4);">
+              <label for="prop-landmark" class="form-label">Prominent Landmark / Access Road</label>
+              <input type="text" id="prop-landmark" name="landmark" class="form-input" placeholder="e.g. Opposite Horizon Centre / Near Metro Station">
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SECTION 3: PROPERTY DETAILS
+               ========================================== -->
+          <div class="form-section-pane" id="step-pane-3">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 3: Structural & Spatial Details</h2>
+              <p class="section-pane-desc">Square footages, layout configuration, floor elevation, and orientation.</p>
+            </div>
+
+            <!-- Bedrooms (Hidden for Plot) -->
+            <div class="form-field cond-structure-only">
+              <label class="form-label">Bedrooms (BHK) <span class="required-mark">*</span></label>
+              <div class="selectable-pills-row">
+                <label class="pill-option-label">
+                  <input type="radio" name="bedrooms" value="1">
+                  <span class="pill-option-chip">1 BHK</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="bedrooms" value="2">
+                  <span class="pill-option-chip">2 BHK</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="bedrooms" value="3" checked>
+                  <span class="pill-option-chip">3 BHK</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="bedrooms" value="4">
+                  <span class="pill-option-chip">4 BHK</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="bedrooms" value="5">
+                  <span class="pill-option-chip">5+ BHK</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Bathrooms & Balconies -->
+            <div class="form-grid-2 cond-structure-only" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-bathrooms" class="form-label">Bathrooms <span class="required-mark">*</span></label>
+                <input type="number" id="prop-bathrooms" name="bathrooms" class="form-input" min="1" max="15" value="3" required>
+              </div>
+
+              <div class="form-field">
+                <label for="prop-balconies" class="form-label">Balconies / Verandahs</label>
+                <input type="number" id="prop-balconies" name="balconies" class="form-input" min="0" max="10" value="2">
+              </div>
+            </div>
+
+            <!-- Floor No. & Total Floors (Apartment conditional) -->
+            <div class="form-grid-2 cond-apartment-only" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-floorno" class="form-label">Floor Number <span class="required-mark">*</span></label>
+                <input type="number" id="prop-floorno" name="floorNo" class="form-input" min="0" max="120" value="12">
+              </div>
+
+              <div class="form-field">
+                <label for="prop-totalfloors" class="form-label">Total Floors in Tower <span class="required-mark">*</span></label>
+                <input type="number" id="prop-totalfloors" name="totalFloors" class="form-input" min="1" max="120" value="25">
+              </div>
+            </div>
+
+            <!-- Plot Specific Conditional Fields -->
+            <div class="form-grid-3 cond-plot-only is-hidden" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-plotdimensions" class="form-label">Plot Dimensions (L × W)</label>
+                <input type="text" id="prop-plotdimensions" name="plotDimensions" class="form-input" placeholder="e.g. 60 ft × 90 ft">
+              </div>
+              <div class="form-field">
+                <label for="prop-roadwidth" class="form-label">Facing Road Width</label>
+                <input type="text" id="prop-roadwidth" name="roadWidth" class="form-input" placeholder="e.g. 40 ft wide asphalt road">
+              </div>
+              <div class="form-field">
+                <label for="prop-landtype" class="form-label">Zoning / Land Title</label>
+                <select id="prop-landtype" name="landType" class="form-select">
+                  <option value="NA Residential Freehold">NA Residential Freehold</option>
+                  <option value="Commercial Freehold">Commercial Freehold</option>
+                  <option value="Gated Enclave Plot">Gated Enclave Plot</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Areas: Carpet & Super Built-up -->
+            <div class="form-grid-2" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-carpetarea" class="form-label">Carpet Area (sq.ft) <span class="required-mark">*</span></label>
+                <input type="number" id="prop-carpetarea" name="carpetArea" class="form-input" min="100" max="100000" placeholder="e.g. 2400" required>
+                <span class="form-hint">Usable area within internal walls.</span>
+              </div>
+
+              <div class="form-field">
+                <label for="prop-superarea" class="form-label">Super Built-Up Area (sq.ft)</label>
+                <input type="number" id="prop-superarea" name="superBuiltUpArea" class="form-input" min="100" max="150000" placeholder="e.g. 3100">
+                <span class="form-hint">Includes loading and shared amenities.</span>
+              </div>
+            </div>
+
+            <!-- Property Age & Facing -->
+            <div class="form-grid-2" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-age" class="form-label">Property Age / Possession</label>
+                <select id="prop-age" name="propertyAge" class="form-select">
+                  <option value="New / Ready to Move">Brand New / Ready to Move</option>
+                  <option value="1-3 years">1 to 3 years old</option>
+                  <option value="3-5 years">3 to 5 years old</option>
+                  <option value="5-10 years">5 to 10 years old</option>
+                  <option value="10+ years">10+ years (Well-maintained)</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="prop-facing" class="form-label">Primary Balcony / Entrance Facing</label>
+                <select id="prop-facing" name="facing" class="form-select">
+                  <option value="North-East">North-East (Ishan)</option>
+                  <option value="East">East</option>
+                  <option value="North">North</option>
+                  <option value="West">West</option>
+                  <option value="North-West">North-West</option>
+                  <option value="South-East">South-East</option>
+                  <option value="South">South</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SECTION 4: PRICE & FINANCIALS
+               ========================================== -->
+          <div class="form-section-pane" id="step-pane-4">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 4: Valuation & Financials</h2>
+              <p class="section-pane-desc">Price expectations, maintenance charges, deposits, and negotiability.</p>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label for="prop-price" class="form-label" id="price-field-label">
+                  Expected Selling Price (₹) <span class="required-mark">*</span>
+                </label>
+                <div class="input-affix-wrap">
+                  <span class="input-affix-prefix">₹</span>
+                  <input type="number" id="prop-price" name="price" class="form-input has-prefix" placeholder="e.g. 45000000" min="10000" step="10000" required>
+                </div>
+                <span class="form-hint">Enter total amount in rupees (e.g. 15000000 for 1.5 Cr).</span>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label">Pricing Terms <span class="required-mark">*</span></label>
+                <div class="selectable-pills-row">
+                  <label class="pill-option-label">
+                    <input type="radio" name="priceNegotiable" value="Yes" checked>
+                    <span class="pill-option-chip">Negotiable</span>
+                  </label>
+                  <label class="pill-option-label">
+                    <input type="radio" name="priceNegotiable" value="No">
+                    <span class="pill-option-chip">Fixed Price</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rent Only: Security Deposit & Lease Duration -->
+            <div class="form-grid-2 cond-rent-only is-hidden" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-deposit" class="form-label">Security Deposit (₹)</label>
+                <input type="text" id="prop-deposit" name="securityDeposit" class="form-input" placeholder="e.g. ₹3,50,000 (2 months rent)">
+              </div>
+
+              <div class="form-field">
+                <label for="prop-lockin" class="form-label">Minimum Lock-in Period</label>
+                <select id="prop-lockin" name="lockinPeriod" class="form-select">
+                  <option value="11 Months">11 Months Standard</option>
+                  <option value="2 Years">2 Years Corporate</option>
+                  <option value="3+ Years">3+ Years Institutional</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Maintenance -->
+            <div class="form-grid-2" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="prop-maintenance" class="form-label">Maintenance Charges</label>
+                <input type="text" id="prop-maintenance" name="maintenance" class="form-input" placeholder="e.g. ₹15,000 per month or Included">
+              </div>
+
+              <div class="form-field">
+                <label for="prop-bookingamount" class="form-label">Booking / Token Advance (₹)</label>
+                <input type="text" id="prop-bookingamount" name="bookingAmount" class="form-input" placeholder="e.g. ₹5,00,000">
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SECTION 5: AMENITIES
+               ========================================== -->
+          <div class="form-section-pane" id="step-pane-5">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 5: Curated Amenities</h2>
+              <p class="section-pane-desc">Select all infrastructure and lifestyle amenities provided with this holding.</p>
+            </div>
+
+            <div class="amenities-selector-grid">
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Lift" checked>
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="7 10 12 15 17 10"/></svg>
+                  <span>High-speed Lift</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Parking" checked>
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+                  <span>Covered Parking</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Security" checked>
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>24/7 Security</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Power backup" checked>
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <span>Power Backup</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Gym" checked>
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 5v14M18 5v14M2 9h4M18 9h4M2 15h4M18 15h4"/></svg>
+                  <span>Fitness Center</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Swimming pool" checked>
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/><path d="M2 15c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/></svg>
+                  <span>Swimming Pool</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Clubhouse">
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                  <span>Clubhouse</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="CCTV" checked>
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  <span>CCTV Network</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Air conditioning">
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><rect x="4" y="6" width="16" height="12" rx="2"/></svg>
+                  <span>VRV / Central AC</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Piped Gas">
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c2 4 4 6 4 9a4 4 0 1 1-8 0c0-3 2-5 4-9z"/></svg>
+                  <span>Piped Natural Gas</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Internet">
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                  <span>Fiber Internet</span>
+                </div>
+              </label>
+
+              <label class="amenity-checkbox-card">
+                <input type="checkbox" name="amenities" value="Garden">
+                <div class="amenity-card-body">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10S2 17.5 2 12A10 10 0 0 1 12 2z"/></svg>
+                  <span>Private Garden / Lawn</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SECTION 6: FURNISHING
+               ========================================== -->
+          <div class="form-section-pane" id="step-pane-6">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 6: Furnishing & Inventory</h2>
+              <p class="section-pane-desc">Inventory details for fitments, appliances, and cabinetry.</p>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Furnishing Status <span class="required-mark">*</span></label>
+              <div class="selectable-pills-row">
+                <label class="pill-option-label">
+                  <input type="radio" name="furnishing" value="Fully Furnished">
+                  <span class="pill-option-chip">Fully Furnished</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="furnishing" value="Semi-Furnished" checked>
+                  <span class="pill-option-chip">Semi-Furnished</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="furnishing" value="Unfurnished">
+                  <span class="pill-option-chip">Unfurnished / Bare Shell</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Conditional Quantity Steppers -->
+            <div id="cond-furnishing-items-block" style="margin-top: var(--space-6);">
+              <h3 style="font-size: 1rem; margin-bottom: var(--space-4); color: var(--color-text);">Included Furnishing Items:</h3>
+              <div class="form-grid-4">
+                <div class="form-field">
+                  <label class="form-label">Beds</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtyBeds" class="qty-input" value="3" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Wardrobes</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtyWardrobes" class="qty-input" value="4" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Air Conditioners</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtyAC" class="qty-input" value="4" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Geysers</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtyGeysers" class="qty-input" value="3" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Modular Kitchen</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtyKitchen" class="qty-input" value="1" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Televisions</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtyTV" class="qty-input" value="2" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Sofa Sets</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtySofa" class="qty-input" value="1" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Dining Table</label>
+                  <div class="quantity-stepper-wrap">
+                    <button type="button" class="qty-btn qty-minus">-</button>
+                    <input type="text" name="qtyDining" class="qty-input" value="1" readonly>
+                    <button type="button" class="qty-btn qty-plus">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SECTION 7: OWNER / CONTACT
+               ========================================== -->
+          <div class="form-section-pane" id="step-pane-7">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 7: Owner / Representative Credentials</h2>
+              <p class="section-pane-desc">Advisor or owner contact coordinates for prospective buyers.</p>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label for="owner-name" class="form-label">Authorized Representative Name <span class="required-mark">*</span></label>
+                <input type="text" id="owner-name" name="ownerName" class="form-input" placeholder="e.g. Yatharth" required minlength="3">
+              </div>
+
+              <div class="form-field">
+                <label for="owner-phone" class="form-label">Direct Contact Phone <span class="required-mark">*</span></label>
+                <input type="tel" id="owner-phone" name="ownerPhone" class="form-input" placeholder="10-digit mobile number" required data-validate="phone">
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: var(--space-4);">
+              <div class="form-field">
+                <label for="owner-email" class="form-label">Verified Email Address <span class="required-mark">*</span></label>
+                <input type="email" id="owner-email" name="ownerEmail" class="form-input" placeholder="representative@domain.com" required data-validate="email">
+              </div>
+
+              <div class="form-field">
+                <label for="owner-hours" class="form-label">Inspection Tour Hours</label>
+                <select id="owner-hours" name="visitingHours" class="form-select">
+                  <option value="All Days (10:00 AM - 7:00 PM)">All Days (10:00 AM - 7:00 PM)</option>
+                  <option value="Weekends Only (Saturday & Sunday)">Weekends Only (Saturday & Sunday)</option>
+                  <option value="Prior Appointment Only (24h Notice)">Prior Appointment Only (24h Notice)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-field" style="margin-top: var(--space-4);">
+              <label class="form-label">Preferred Mode for Receiving Enquiries</label>
+              <div class="selectable-pills-row">
+                <label class="pill-option-label">
+                  <input type="radio" name="ownerContactMethod" value="Phone Call" checked>
+                  <span class="pill-option-chip">📞 Telephone Call</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="ownerContactMethod" value="WhatsApp">
+                  <span class="pill-option-chip">💬 WhatsApp</span>
+                </label>
+                <label class="pill-option-label">
+                  <input type="radio" name="ownerContactMethod" value="Email">
+                  <span class="pill-option-chip">✉️ Email</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SECTION 8: PROPERTY IMAGES
+               ========================================== -->
+          <div class="form-section-pane" id="step-pane-8">
+            <div class="section-pane-header">
+              <h2 class="section-pane-title">Section 8: High-Resolution Photography</h2>
+              <p class="section-pane-desc">Upload architectural photos (min 800×500px, max 5MB each). First image serves as Cover Photo.</p>
+            </div>
+
+            <!-- Drag and Drop Dropzone -->
+            <div class="dropzone-box" id="image-dropzone" role="button" tabindex="0" aria-label="Upload property photographs">
+              <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <div class="dropzone-text">Click to choose photos or drag and drop here</div>
+              <div class="dropzone-subtext">JPG, PNG, or WebP up to 5MB (Automated dimension verification)</div>
+              <input type="file" id="property-images-input" multiple accept="image/jpeg,image/png,image/webp" style="display: none;">
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-4);">
+              <span id="image-upload-status" style="font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary);">
+                0 of 10 photos uploaded
+              </span>
+            </div>
+
+            <!-- Upload Previews Container -->
+            <div class="uploaded-previews-grid" id="image-previews-container">
+              <!-- Rendered dynamically by js/image-upload.js -->
+            </div>
+
+            <!-- Terms & Verification -->
+            <div class="form-field" style="margin-top: var(--space-8); padding-top: var(--space-4); border-top: 1px solid var(--color-border-subtle);">
+              <label class="custom-checkbox-label">
+                <input type="checkbox" required id="prop-terms-agree" checked>
+                <span style="font-size: 0.8125rem;">
+                  I certify that I am the legal owner or authorized RERA advisor for this property holding, and all uploaded dimensions and specifications are accurate.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Wizard Navigation Footer Buttons -->
+          <div class="wizard-footer-bar">
+            <div class="wizard-footer-left">
+              <button type="button" class="btn btn-secondary" id="wizard-prev-btn" style="visibility: hidden;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                <span>Previous Section</span>
+              </button>
+            </div>
+
+            <div class="wizard-footer-right">
+              <button type="button" class="btn btn-primary" id="wizard-next-btn">
+                <span>Save & Continue</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+
+              <button type="submit" class="btn btn-accent btn-lg" id="wizard-submit-btn" style="display: none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Publish Listing to Marketplace</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/draft-storage.js"></script>
+  <script src="js/image-upload.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/listing-form.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.ListingFormWizard) {
+        window.ListingFormWizard.init();
+      }
+    });
+  </script>
+</body>
+</html>

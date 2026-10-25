@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advisor & Client Sign In — Habitex</title>
+  <meta name="description" content="Sign in to your Habitex account to access private listings, manage property enquiries, and review transaction dockets. Discover where you belong.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main">
+    <div class="auth-split-wrapper">
+      <!-- Visual Column (Architectural) -->
+      <div class="auth-visual-column">
+        <div class="auth-visual-header">
+          <div class="brand">
+            <div class="brand-symbol">
+              <img src="assets/icons/logo.svg" alt="Habitex Logo" width="40" height="40">
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">HABITEX</span>
+              <span class="brand-tagline">discover where you belong</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-visual-quote-wrap">
+          <blockquote class="auth-quote-text">
+            “Architecture is the learned game, correct and magnificent, of forms assembled in the light.”
+          </blockquote>
+          <div class="auth-quote-author">Le Corbusier</div>
+          <div class="auth-quote-role">Master Urban Planner & Architectural Pioneer</div>
+        </div>
+
+        <div class="auth-visual-footer">
+          <span>RERA Registered Advisor Network</span>
+          <span>•</span>
+          <span>Institutional Escrow Protocol</span>
+        </div>
+      </div>
+
+      <!-- Form Column -->
+      <div class="auth-form-column">
+        <div class="auth-form-container">
+          <div class="auth-header">
+            <div class="auth-eyebrow">Client & Advisor Access</div>
+            <h1 class="auth-title">Sign In to Habitex</h1>
+            <p class="auth-subtitle">Manage your verified real estate holdings and active purchaser inquiries.</p>
+          </div>
+
+          <!-- Active Session Notice Banner -->
+          <div id="already-logged-in-banner" style="display:none; background:var(--color-primary-light); border:1px solid var(--color-primary); border-radius:var(--radius-md); padding:var(--space-3) var(--space-4); margin-bottom:var(--space-5); font-size:0.875rem; color:var(--color-primary);">
+            <div>Currently signed in as <strong id="logged-in-user-name">Yatharth</strong>.</div>
+            <div style="margin-top:var(--space-2); display:flex; gap:var(--space-3); align-items:center;">
+              <a href="dashboard.html" class="btn btn-primary btn-sm" style="font-size:0.8125rem; padding:0.25rem 0.75rem;">Go to Dashboard</a>
+              <a href="logout.html" class="btn btn-outline btn-sm" style="font-size:0.8125rem; padding:0.25rem 0.75rem;">Sign Out</a>
+            </div>
+          </div>
+
+          <form id="login-form" class="auth-form" novalidate>
+            <!-- Email -->
+            <div class="form-field">
+              <label for="login-email" class="form-label">
+                Email Address <span class="required-mark">*</span>
+              </label>
+              <input type="email" id="login-email" name="email" class="form-input" placeholder="name@domain.com" required data-validate="email" value="yatharth@habitex.in">
+            </div>
+
+            <!-- Password with Toggle -->
+            <div class="form-field">
+              <label for="login-password" class="form-label">
+                Password <span class="required-mark">*</span>
+              </label>
+              <div class="password-input-wrap">
+                <input type="password" id="login-password" name="password" class="form-input" placeholder="••••••••" required minlength="6" value="EstatePass2026!">
+                <button type="button" class="password-toggle-btn" id="toggle-password-btn" aria-label="Toggle password visibility">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Options Row -->
+            <div class="auth-options-row">
+              <label class="custom-checkbox-label">
+                <input type="checkbox" id="login-remember" checked>
+                <span>Remember session</span>
+              </label>
+              <a href="javascript:void(0)" onclick="window.showToast('Password reset instructions sent to your email.', 'info')" class="forgot-password-link">Forgot password?</a>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-lg w-100" style="margin-top: var(--space-2);">
+              <span>Sign In to Dashboard</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+
+            <!-- Social Authentication Simulation -->
+            <div class="auth-divider">or authenticate via corporate SSO</div>
+            <div class="social-auth-grid">
+              <button type="button" class="btn-social" onclick="window.demoSocialLogin('Google')">
+                <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3 0-.8.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 10.8 0 12s.7 2.3 1.9 4.7l3.7-1.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.4C3.7 20.1 7.5 23 12 23z"/></svg>
+                <span>Google</span>
+              </button>
+              <button type="button" class="btn-social" onclick="window.demoSocialLogin('Apple')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.98.6-2.62 1.35-.57.65-1.07 1.72-.94 2.75 1 .08 2.02-.51 2.63-1.25z"/></svg>
+                <span>Apple ID</span>
+              </button>
+            </div>
+
+            <!-- Switch to Register -->
+            <div class="auth-switch-text">
+              Don't have an account? <a href="register.html">Create an account</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check if user is already logged in
+      const currentUser = window.AuthManager ? window.AuthManager.getUser() : null;
+      if (currentUser) {
+        const banner = document.getElementById("already-logged-in-banner");
+        const nameEl = document.getElementById("logged-in-user-name");
+        if (banner && nameEl) {
+          nameEl.textContent = currentUser.name;
+          banner.style.display = "block";
+        }
+      }
+
+      const form = document.getElementById("login-form");
+      const passwordInput = document.getElementById("login-password");
+      const toggleBtn = document.getElementById("toggle-password-btn");
+
+      // Password visibility toggle
+      if (toggleBtn && passwordInput) {
+        toggleBtn.addEventListener("click", () => {
+          const isPassword = passwordInput.type === "password";
+          passwordInput.type = isPassword ? "text" : "password";
+          toggleBtn.innerHTML = isPassword
+            ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+            : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+        });
+      }
+
+      // Attach validation
+      if (window.FormValidator && form) {
+        window.FormValidator.attachLiveValidation(form);
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const isValid = window.FormValidator.validateContainer(form);
+          if (!isValid) return;
+
+          const email = document.getElementById("login-email").value.trim();
+          const pass = document.getElementById("login-password").value;
+          const remember = document.getElementById("login-remember").checked;
+
+          const res = window.AuthManager.login(email, pass, remember);
+          if (res.success) {
+            window.showToast(`Signed in successfully as ${res.user.name}.`, "success", 2500);
+            setTimeout(() => {
+              window.location.href = "dashboard.html";
+            }, 600);
+          }
+        });
+      }
+
+      window.demoSocialLogin = function(provider) {
+        window.AuthManager.login("investor@habitex.in", "DemoPass123");
+        window.showToast(`Signed in via ${provider} SSO simulation.`, "success");
+        setTimeout(() => window.location.href = "dashboard.html", 500);
+      };
+    });
+  </script>
+</body>
+</html>

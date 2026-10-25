@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advisor & Owner Dashboard — Habitex</title>
+  <meta name="description" content="Manage your published property listings, review client enquiries, and resume in-progress drafts on Habitex. Discover where you belong.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main dashboard-page-wrap">
+    <div class="container">
+      <!-- User Greeting Bar -->
+      <div class="dashboard-hero-bar">
+        <div class="dashboard-user-greeting">
+          <div class="dashboard-avatar" id="dash-avatar">Y</div>
+          <div>
+            <div class="greeting-role-badge" id="dash-user-role">Seller / Investor Account</div>
+            <h1 class="greeting-name" id="dash-user-name">Welcome back, Yatharth</h1>
+          </div>
+        </div>
+
+        <div class="dashboard-actions-wrap">
+          <a href="add-property.html" class="btn btn-primary btn-sm">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>List New Property</span>
+          </a>
+          <a href="performance.html" class="btn btn-secondary btn-sm">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Performance Lab</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 Overview Metric Cards -->
+      <section class="dashboard-metrics-grid" aria-label="Portfolio Overview">
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-title">Active Holdings</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="metric-val" id="metric-listings-count">0</div>
+          <div class="metric-hint">Active in marketplace</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-title">Client Enquiries</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="metric-val" id="metric-enquiries-count">0</div>
+          <div class="metric-hint">Tour and purchase requests</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-title">Saved Properties</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="metric-val" id="metric-saved-count">0</div>
+          <div class="metric-hint">Bookmarked holdings</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-card-header">
+            <span class="metric-title">Draft Listings</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="metric-val" id="metric-drafts-count">0</div>
+          <div class="metric-hint">In-progress sessions</div>
+        </div>
+      </section>
+
+      <!-- Dashboard Tabs Navigation -->
+      <nav class="dashboard-nav-tabs" aria-label="Dashboard Sections">
+        <button type="button" class="dash-tab-btn active" data-panel="listings">
+          <span>My Listings</span>
+          <span class="dash-tab-count" id="tab-count-listings">0</span>
+        </button>
+        <button type="button" class="dash-tab-btn" data-panel="enquiries">
+          <span>Received Enquiries</span>
+          <span class="dash-tab-count" id="tab-count-enquiries">0</span>
+        </button>
+        <button type="button" class="dash-tab-btn" data-panel="saved">
+          <span>Saved Portfolio</span>
+          <span class="dash-tab-count" id="tab-count-saved">0</span>
+        </button>
+        <button type="button" class="dash-tab-btn" data-panel="drafts">
+          <span>Drafts & Autosaves</span>
+        </button>
+      </nav>
+
+      <!-- TAB 1: My Listings Table -->
+      <section class="dash-panel" id="panel-listings" aria-label="My Listings">
+        <div class="dashboard-table-card">
+          <div class="table-responsive">
+            <table class="property-admin-table">
+              <thead>
+                <tr>
+                  <th>Property Details</th>
+                  <th>Type</th>
+                  <th>Price</th>
+                  <th>Typology</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="my-listings-tbody">
+                <!-- Rendered dynamically by js/dashboard.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: Enquiries List -->
+      <section class="dash-panel" id="panel-enquiries" style="display: none;" aria-label="Enquiries Received">
+        <div class="enquiry-cards-list" id="dashboard-enquiries-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- TAB 3: Saved Properties -->
+      <section class="dash-panel" id="panel-saved" style="display: none;" aria-label="Saved Properties">
+        <div class="properties-grid-container" id="dashboard-saved-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- TAB 4: Draft Listings -->
+      <section class="dash-panel" id="panel-drafts" style="display: none;" aria-label="Draft Listings">
+        <div class="details-card" id="dashboard-draft-card">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/draft-storage.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.DashboardController) {
+        window.DashboardController.init();
+      }
+    });
+  </script>
+</body>
+</html>

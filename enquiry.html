@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule Site Visit & Property Enquiry — Habitex</title>
+  <meta name="description" content="Reserve a private accompanied inspection or submit an official enquiry for properties listed on Habitex. Discover where you belong.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main form-page-layout">
+    <div class="container container-form">
+      <div class="form-page-header">
+        <h1 class="form-page-title">Property Enquiry & Private Tour</h1>
+        <p class="form-page-subtitle">
+          Submit an official inquiry or schedule a private accompanied inspection with a certified senior advisor.
+        </p>
+      </div>
+
+      <div class="form-wizard-card" id="enquiry-form-card">
+        <form id="enquiry-main-form" novalidate>
+          <!-- Property Selection -->
+          <div class="form-field" style="margin-bottom: var(--space-5);">
+            <label for="enquiry-property-select" class="form-label">
+              Selected Property Holding <span class="required-mark">*</span>
+            </label>
+            <select id="enquiry-property-select" class="form-select" required aria-label="Select property">
+              <option value="">-- Choose a property or general inquiry --</option>
+            </select>
+            <span class="form-hint">You can inquire about a specific property from the catalog or request general advisory.</span>
+          </div>
+
+          <!-- Personal Information -->
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label for="enquiry-name" class="form-label">
+                Full Name <span class="required-mark">*</span>
+              </label>
+              <input type="text" id="enquiry-name" name="name" class="form-input" placeholder="e.g. Yatharth" required minlength="3">
+            </div>
+
+            <div class="form-field">
+              <label for="enquiry-phone" class="form-label">
+                Mobile Number <span class="required-mark">*</span>
+              </label>
+              <input type="tel" id="enquiry-phone" name="phone" class="form-input" placeholder="10-digit mobile number" required data-validate="phone">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top: var(--space-4);">
+            <div class="form-field">
+              <label for="enquiry-email" class="form-label">
+                Corporate or Personal Email <span class="required-mark">*</span>
+              </label>
+              <input type="email" id="enquiry-email" name="email" class="form-input" placeholder="name@domain.com" required data-validate="email">
+            </div>
+
+            <div class="form-field">
+              <label for="enquiry-type" class="form-label">
+                Enquiry Intent <span class="required-mark">*</span>
+              </label>
+              <select id="enquiry-type" name="enquiryType" class="form-select" required>
+                <option value="Site Inspection / Accompanied Visit">Schedule Site Visit & Tour</option>
+                <option value="Price Negotiation / Offer">Price Negotiation & Offer Submission</option>
+                <option value="Legal & Title Verification">Legal / Title Docket Request</option>
+                <option value="Financing Advisory">Mortgage & Structured Finance</option>
+                <option value="General Portfolio Query">General Portfolio Consultation</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Contact Preference -->
+          <div class="form-field" style="margin-top: var(--space-5);">
+            <label class="form-label">Preferred Mode of Communication</label>
+            <div class="selectable-pills-row">
+              <label class="pill-option-label">
+                <input type="radio" name="contactMethod" value="Phone Call" checked>
+                <span class="pill-option-chip">📞 Telephone Call</span>
+              </label>
+              <label class="pill-option-label">
+                <input type="radio" name="contactMethod" value="WhatsApp">
+                <span class="pill-option-chip">💬 WhatsApp</span>
+              </label>
+              <label class="pill-option-label">
+                <input type="radio" name="contactMethod" value="Email">
+                <span class="pill-option-chip">✉️ Email Memo</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Scheduling Options -->
+          <div style="margin-top: var(--space-6); padding-top: var(--space-5); border-top: 1px solid var(--color-border-subtle);">
+            <h3 style="font-size: 1.1rem; margin-bottom: var(--space-3); color: var(--color-text);">Inspection Tour Preferences</h3>
+            <div class="form-grid-2">
+              <div class="form-field">
+                <label for="enquiry-visit-date" class="form-label">Preferred Date of Inspection</label>
+                <input type="date" id="enquiry-visit-date" name="visitDate" class="form-input">
+              </div>
+
+              <div class="form-field">
+                <label for="enquiry-visit-time" class="form-label">Preferred Time Window</label>
+                <select id="enquiry-visit-time" name="visitTime" class="form-select">
+                  <option value="Morning (10:00 AM – 1:00 PM)">Morning (10:00 AM – 1:00 PM)</option>
+                  <option value="Afternoon (1:00 PM – 4:00 PM)">Afternoon (1:00 PM – 4:00 PM)</option>
+                  <option value="Evening (4:00 PM – 7:00 PM)">Evening (4:00 PM – 7:00 PM)</option>
+                  <option value="Flexible / Contact to Coordinate">Flexible / Contact to Coordinate</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="form-field" style="margin-top: var(--space-5);">
+            <label for="enquiry-message" class="form-label">
+              Inquiry Brief or Special Requirements <span class="required-mark">*</span>
+            </label>
+            <textarea id="enquiry-message" name="message" class="form-textarea" rows="4" placeholder="Mention any specific requirements (e.g. possession timeline, parking requirements, financing status)..." required minlength="15"></textarea>
+            <span class="form-hint">Minimum 15 characters.</span>
+          </div>
+
+          <!-- Consent Checkbox -->
+          <div class="form-field" style="margin-top: var(--space-4);">
+            <label class="custom-checkbox-label">
+              <input type="checkbox" required id="enquiry-consent" checked>
+              <span style="font-size: 0.8125rem;">
+                I authorize Habitex and certified partner advisors to contact me regarding this enquiry in accordance with the <a href="javascript:void(0)" style="text-decoration: underline;">Privacy Policy</a>.
+              </span>
+            </label>
+          </div>
+
+          <div style="margin-top: var(--space-8); display: flex; justify-content: flex-end; gap: var(--space-3);">
+            <a href="properties.html" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-lg">
+              <span>Dispatch Official Enquiry</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Trust Note Footer -->
+      <div style="text-align: center; margin-top: var(--space-6); font-size: 0.8125rem; color: var(--color-text-muted);">
+        🔒 Your inquiry is handled with institutional confidentiality. No spam or unsolicited marketing calls.
+      </div>
+    </div>
+  </main>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/enquiry.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.EnquiryController) {
+        window.EnquiryController.init();
+      }
+    });
+  </script>
+</body>
+</html>

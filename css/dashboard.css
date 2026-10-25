@@ -1,0 +1,293 @@
+/* ==========================================================================
+   DASHBOARD & MY LISTINGS STYLES
+   Real Estate Centric, High-Trust Editorial Presentation
+   ========================================================================== */
+
+.dashboard-page-wrap {
+  padding: var(--space-8) 0 var(--space-20);
+}
+
+.dashboard-hero-bar {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6) var(--space-8);
+  margin-bottom: var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.dashboard-user-greeting {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.dashboard-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.greeting-name {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.greeting-role-badge {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dashboard-actions-wrap {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* Metric Cards Grid */
+.dashboard-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.metric-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.metric-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.metric-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+}
+
+.metric-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+}
+
+.metric-val {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+
+.metric-hint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Dashboard Tabs Navigation */
+.dashboard-nav-tabs {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-6);
+}
+
+.dash-tab-btn {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dash-tab-btn:hover {
+  color: var(--color-text);
+}
+
+.dash-tab-btn.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.dash-tab-count {
+  font-size: 0.75rem;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text);
+}
+
+.dash-tab-btn.active .dash-tab-count {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+/* Listings Table */
+.dashboard-table-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.property-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.property-admin-table th {
+  padding: var(--space-4) var(--space-5);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface-subtle);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.property-admin-table td {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.property-admin-table tr:hover td {
+  background-color: #FAFAFA;
+}
+
+.table-prop-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 240px;
+}
+
+.table-prop-thumb {
+  width: 60px;
+  height: 45px;
+  border-radius: var(--radius-xs);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.table-prop-title {
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.table-prop-location {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.table-actions-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Enquiries List Cards */
+.enquiry-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.enquiry-item-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5) var(--space-6);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.enquiry-buyer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.buyer-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.buyer-contact-line {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.enquiry-prop-ref {
+  font-size: 0.875rem;
+}
+
+.prop-ref-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.prop-ref-title {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.enquiry-message-snippet {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  font-style: italic;
+  max-width: 260px;
+}

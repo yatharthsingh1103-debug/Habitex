@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Details — Habitex</title>
+  <meta name="description" content="Detailed architectural overview, floor specifications, neighborhood accessibility, and certified advisor contact for this prime property.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/property-details.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="has-mobile-bar">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main">
+    <!-- Header / Title Bar -->
+    <section class="details-page-header" aria-label="Listing Headline">
+      <div class="container">
+        <nav class="catalog-breadcrumbs" aria-label="Breadcrumb">
+          <a href="home.html">Home</a>
+          <span>/</span>
+          <a href="properties.html">Properties</a>
+          <span>/</span>
+          <span id="details-bc-title" style="color: var(--color-text);">Loading property...</span>
+        </nav>
+
+        <div class="details-headline-row">
+          <div class="details-headline-main">
+            <div style="display:flex; gap: var(--space-2); margin-bottom: var(--space-2); align-items:center;">
+              <span class="badge badge-verified">RERA Verified</span>
+              <span class="badge badge-sale" id="details-badge-type">For Sale</span>
+              <span class="badge badge-featured" id="details-badge-category">Apartment</span>
+            </div>
+            <h1 class="details-title" id="details-title">Loading Architectural Residence...</h1>
+            <div class="details-location-text">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span id="details-location">Loading location...</span>
+            </div>
+          </div>
+
+          <div class="details-headline-actions">
+            <div class="details-price-badge">
+              <div class="details-price-val" id="details-price">₹0.00</div>
+              <div class="details-price-rate" id="details-rate">Calculating rate...</div>
+            </div>
+
+            <button type="button" class="btn btn-secondary btn-icon-only" id="details-fav-btn" aria-label="Save to bookmarks" title="Save to bookmarks">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+
+            <button type="button" class="btn btn-secondary btn-icon-only" id="details-share-btn" aria-label="Share property link" title="Share property link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Photo Gallery Mosaic -->
+      <section class="gallery-mosaic-wrap" id="gallery-mosaic" aria-label="Property Photo Gallery">
+        <!-- Rendered dynamically by js/property-details.js -->
+      </section>
+
+      <!-- Key Specs Ribbon -->
+      <section class="specs-ribbon" id="specs-ribbon" aria-label="Property Overview Specifications">
+        <!-- Rendered dynamically -->
+      </section>
+
+      <!-- Main Two-Column Layout -->
+      <div class="details-content-grid">
+        <!-- Left Main Column -->
+        <div class="details-main-col">
+          <!-- Property Description -->
+          <article class="details-card">
+            <h2 class="details-card-title">Architectural Overview</h2>
+            <p class="property-desc-text" id="details-description">
+              Loading description...
+            </p>
+          </article>
+
+          <!-- Specifications Table -->
+          <section class="details-card">
+            <h2 class="details-card-title">Property Details & Financials</h2>
+            <dl class="specs-table-grid" id="details-specs-table">
+              <!-- Rendered dynamically -->
+            </dl>
+          </section>
+
+          <!-- Amenities Grid -->
+          <section class="details-card">
+            <h2 class="details-card-title">Curated Amenities & Infrastructure</h2>
+            <div class="amenities-grid" id="details-amenities-grid">
+              <!-- Rendered dynamically -->
+            </div>
+          </section>
+
+          <!-- Neighborhood & Landmarks -->
+          <section class="details-card">
+            <h2 class="details-card-title">Neighborhood Proximity</h2>
+            <p style="font-size:0.875rem; color:var(--color-text-secondary); margin-bottom: 0.5rem;">
+              Prime transportation arterials and social infrastructure within immediate transit:
+            </p>
+            <div class="landmarks-list">
+              <div class="landmark-item">
+                <div class="landmark-name">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 17l5-5 5 5"/></svg>
+                  <span>Rapid Metro Station</span>
+                </div>
+                <span class="landmark-distance">450 meters (4 min walk)</span>
+              </div>
+              <div class="landmark-item">
+                <div class="landmark-name">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+                  <span>International Airport (IGI / T3)</span>
+                </div>
+                <span class="landmark-distance">18 km (22 min drive)</span>
+              </div>
+              <div class="landmark-item">
+                <div class="landmark-name">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span>The Shri Ram School</span>
+                </div>
+                <span class="landmark-distance">1.2 km (5 min drive)</span>
+              </div>
+              <div class="landmark-item">
+                <div class="landmark-name">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                  <span>Fortis Multi-Specialty Hospital</span>
+                </div>
+                <span class="landmark-distance">2.5 km (8 min drive)</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Sticky Sidebar -->
+        <aside class="details-sidebar" aria-label="Advisor Contact & Enquiry">
+          <!-- Agent Card -->
+          <div class="agent-card">
+            <div class="agent-profile-header">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Advisor" class="agent-photo" id="agent-photo">
+              <div>
+                <div class="agent-name" id="agent-name">Senior Real Estate Advisor</div>
+                <div class="agent-type" id="agent-role">Certified Partner</div>
+                <div class="agent-rera" id="agent-rera">RERA ID: HRERA-GGM-2021</div>
+              </div>
+            </div>
+
+            <!-- Quick Direct Enquiry Form -->
+            <form id="agent-quick-enquiry-form" class="agent-quick-form">
+              <div class="form-field">
+                <input type="text" class="agent-form-input" id="quick-name" placeholder="Your Full Name" required aria-label="Your Name">
+              </div>
+              <div class="form-field">
+                <input type="tel" class="agent-form-input" id="quick-phone" placeholder="Mobile Number (10 digits)" required data-validate="phone" aria-label="Mobile Number">
+              </div>
+              <div class="form-field">
+                <input type="email" class="agent-form-input" id="quick-email" placeholder="Corporate Email" required data-validate="email" aria-label="Email Address">
+              </div>
+              <div class="form-field">
+                <textarea class="agent-form-input" id="quick-message" rows="3" placeholder="I am interested in this listing. Please arrange a consultation or site inspection." aria-label="Message"></textarea>
+              </div>
+
+              <div class="agent-actions-stack">
+                <button type="submit" class="btn btn-primary btn-sm w-100">Send Direct Enquiry</button>
+                <a href="enquiry.html" id="schedule-tour-link" class="btn btn-secondary btn-sm w-100">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span>Book Accompanied Tour</span>
+                </a>
+                <a href="tel:+919811044219" class="btn btn-outline btn-sm w-100" id="agent-phone-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <span>Call Advisor Directly</span>
+                </a>
+              </div>
+            </form>
+          </div>
+
+          <!-- Legal & Verification Note -->
+          <div class="guarantee-note">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div>
+              <strong>Habitex Legal Safeguard:</strong> This listing possesses certified cadastral survey documents, encumbrance certificates, and RERA approvals.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Sticky Action Bar -->
+  <div class="mobile-bottom-bar" aria-label="Mobile Actions">
+    <a href="enquiry.html" class="btn btn-primary btn-sm" style="flex:1;">Schedule Site Visit</a>
+    <a href="tel:+919811044219" class="btn btn-secondary btn-sm" style="flex:1;">Call Advisor</a>
+  </div>
+
+  <!-- Fullscreen Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+    <div class="lightbox-header">
+      <div id="lightbox-counter">1 of 5</div>
+      <button type="button" class="btn-icon-only btn-ghost" id="lightbox-close" aria-label="Close Lightbox" style="color:#FFFFFF; font-size:1.5rem;">✕</button>
+    </div>
+    <div class="lightbox-img-wrap">
+      <button type="button" class="lightbox-nav-btn" id="lightbox-prev" aria-label="Previous Photo">‹</button>
+      <img src="" alt="Full property view" id="lightbox-img">
+      <button type="button" class="lightbox-nav-btn" id="lightbox-next" aria-label="Next Photo">›</button>
+    </div>
+  </div>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/property-details.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.PropertyDetailsController) {
+        window.PropertyDetailsController.init();
+      }
+
+      // Sync schedule tour link query
+      const params = new URLSearchParams(window.location.search);
+      const propId = params.get("id") || "prop-101";
+      const tourLink = document.getElementById("schedule-tour-link");
+      if (tourLink) {
+        tourLink.href = `enquiry.html?propId=${propId}`;
+      }
+    });
+  </script>
+</body>
+</html>

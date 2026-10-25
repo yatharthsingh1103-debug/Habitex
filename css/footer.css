@@ -1,0 +1,224 @@
+/* ==========================================================================
+   FOOTER COMPONENT STYLES
+   ========================================================================== */
+
+.site-footer {
+  background-color: #222624;
+  color: #D1D5D2;
+  padding-top: var(--space-16);
+  border-top: 1px solid #2E3431;
+  margin-top: auto;
+}
+
+.footer-top {
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr;
+  gap: var(--space-8);
+}
+
+/* Brand column */
+.footer-brand-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.footer-brand-symbol {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.footer-brand-symbol img,
+.footer-brand-symbol svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.footer-brand-desc {
+  font-size: 0.875rem;
+  color: #9CA39F;
+  line-height: 1.65;
+  max-width: 320px;
+}
+
+.footer-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: #9CA39F;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.footer-contact-item svg {
+  color: var(--color-accent);
+}
+
+/* Link Columns */
+.footer-col-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  margin-bottom: var(--space-4);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer-link {
+  font-size: 0.875rem;
+  color: #9CA39F;
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: var(--color-accent);
+  transform: translateX(2px);
+}
+
+/* Newsletter Column */
+.footer-newsletter-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.newsletter-desc {
+  font-size: 0.875rem;
+  color: #9CA39F;
+  line-height: 1.5;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  color: #FFFFFF;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.newsletter-input:focus {
+  border-color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+.newsletter-input::placeholder {
+  color: #6B726F;
+}
+
+.newsletter-btn {
+  background-color: var(--color-accent);
+  color: #222624;
+  font-weight: 600;
+  padding: 0.625rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.newsletter-btn:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* Footer Bottom Bar */
+.footer-bottom {
+  padding: var(--space-6) 0;
+}
+
+.footer-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: 0.8125rem;
+  color: #838A86;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: var(--space-4);
+  list-style: none;
+}
+
+.footer-legal-link {
+  color: #838A86;
+  text-decoration: none;
+}
+
+.footer-legal-link:hover {
+  color: #FFFFFF;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.social-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #B2B8B5;
+  transition: all var(--transition-fast);
+}
+
+.social-icon-btn:hover {
+  background: var(--color-accent);
+  color: #222624;
+  transform: translateY(-2px);
+}

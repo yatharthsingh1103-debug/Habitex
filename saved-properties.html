@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Properties Portfolio — Habitex</title>
+  <meta name="description" content="Access your bookmarked residences and commercial properties across India's premier enclaves.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/properties.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main" style="padding: var(--space-8) 0 var(--space-20);">
+    <div class="container">
+      <div style="margin-bottom: var(--space-8);">
+        <nav class="catalog-breadcrumbs" aria-label="Breadcrumb">
+          <a href="home.html">Home</a>
+          <span>/</span>
+          <span style="color: var(--color-text);">Saved Properties</span>
+        </nav>
+        <h1 class="catalog-title">Your Curated Portfolio</h1>
+        <p style="font-size: 0.9375rem; color: var(--color-text-secondary); max-width: 600px;">
+          Holdings you have bookmarked for comparative analysis, accompanied site inspections, or direct negotiation.
+        </p>
+      </div>
+
+      <!-- Saved Properties Grid Container -->
+      <div class="properties-grid-container" id="saved-properties-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function renderSavedPage() {
+      const grid = document.getElementById("saved-properties-grid");
+      if (!grid) return;
+
+      const savedIds = JSON.parse(localStorage.getItem("estatecraft_saved_properties") || "[]");
+      const allProps = window.PropertyStorage ? window.PropertyStorage.getAll() : [];
+      const savedProps = allProps.filter(p => savedIds.includes(p.id));
+
+      if (savedProps.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <div class="empty-state-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h2 class="empty-state-title">No Saved Properties in Portfolio</h2>
+            <p class="empty-state-desc">Explore our catalog and click the bookmark icon on any property to save it here for rapid access.</p>
+            <a href="properties.html" class="btn btn-primary btn-sm">Explore Properties</a>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = savedProps.map(p => window.renderPropertyCard(p)).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", renderSavedPage);
+    window.addEventListener("estatecraft-bookmarks-updated", renderSavedPage);
+  </script>
+</body>
+</html>

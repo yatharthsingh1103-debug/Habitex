@@ -1,0 +1,46 @@
+<!-- Component Template: Reusable Property Card -->
+<article class="property-card" data-id="{{id}}">
+  <div class="card-image-wrap">
+    <div class="card-badges">
+      {{#if isVerified}}<span class="badge badge-verified">Verified</span>{{/if}}
+      <span class="badge {{badgeTypeClass}}">{{listingType}}</span>
+    </div>
+    <button class="card-favorite-btn {{favoriteActiveClass}}" data-id="{{id}}" aria-label="Save to bookmarks">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    </button>
+    <img src="{{imageUrl}}" alt="{{title}}" loading="lazy">
+  </div>
+  <div class="card-body">
+    <div class="card-price-row">
+      <div class="card-price">{{formattedPrice}}</div>
+      <div class="card-price-sub">{{pricePerSqFt}}</div>
+    </div>
+    <h3 class="card-title">
+      <a href="property-details.html?id={{id}}">{{title}}</a>
+    </h3>
+    <div class="card-location">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      <span>{{locality}}, {{city}}</span>
+    </div>
+    <div class="card-specs">
+      <div class="spec-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><path d="M2 11h20"/></svg>
+        <span>{{bedrooms}} BHK</span>
+      </div>
+      <div class="spec-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+        <span>{{bathrooms}} Baths</span>
+      </div>
+      <div class="spec-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+        <span>{{carpetArea}} sq.ft</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="badge badge-featured">{{propertyType}}</span>
+      <a href="property-details.html?id={{id}}" class="btn btn-outline btn-sm">View Details</a>
+    </div>
+  </div>
+</article>

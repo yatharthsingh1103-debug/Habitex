@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Performance Benchmarking Lab — Habitex</title>
+  <meta name="description" content="Academic benchmarking lab evaluating keystroke latency, DOM mutation thrashing, and event optimization strategies in large multi-field forms.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/performance.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Reusable Shared Navbar Mount -->
+  <header id="navbar-mount"></header>
+
+  <main id="main-content" class="site-main perf-page-layout">
+    <div class="container">
+      <!-- Academic Header Banner -->
+      <section class="perf-header-banner">
+        <div class="perf-academic-badge">Academic Benchmarking Suite</div>
+        <h1 class="perf-title">Form Input Latency & DOM Thrashing Lab</h1>
+        <p class="perf-desc">
+          Large enterprise forms with 40+ dynamic fields often suffer from input latency and sluggish typing due to frequent event listeners, heavy conditional rendering, and synchronous layout recalculations. This interactive test harness evaluates real keystroke processing time using the browser's high-resolution <code>performance.now()</code> API.
+        </p>
+      </section>
+
+      <!-- 3 Strategy Selection Cards -->
+      <section class="perf-modes-grid" aria-label="Select Optimization Strategy">
+        <div class="perf-mode-card active" data-mode="unoptimized">
+          <span class="perf-mode-badge badge-unoptimized">Mode 1: Synchronous Raw DOM</span>
+          <h2 class="perf-mode-title">Unoptimized Direct Updates</h2>
+          <p class="perf-mode-desc">
+            Executes 40 heavy dependent layout calculations and immediate synchronous DOM mutations on every single keystroke. Illustrates layout thrashing and input lag.
+          </p>
+        </div>
+
+        <div class="perf-mode-card" data-mode="debounced">
+          <span class="perf-mode-badge badge-debounced">Mode 2: Debounced Trailing</span>
+          <h2 class="perf-mode-title">Debounced Event Execution</h2>
+          <p class="perf-mode-desc">
+            Postpones heavy DOM updates until the user pauses typing for 250ms. Keeps the main thread free and typing responsive during active input bursts.
+          </p>
+        </div>
+
+        <div class="perf-mode-card" data-mode="batched">
+          <span class="perf-mode-badge badge-batched">Mode 3: rAF Batched Updates</span>
+          <h2 class="perf-mode-title">requestAnimationFrame Batching</h2>
+          <p class="perf-mode-desc">
+            Queues intermediate mutations and batches layout writes to coordinate with the browser's native display refresh cycle (~16.6ms / 60fps).
+          </p>
+        </div>
+      </section>
+
+      <!-- Interactive Benchmark Sandbox -->
+      <div class="perf-sandbox-wrap">
+        <!-- Input Sandbox -->
+        <div class="sandbox-box">
+          <div class="sandbox-box-header">
+            <h3 class="sandbox-box-title">Interactive Keystroke Input</h3>
+            <button type="button" class="btn btn-secondary btn-sm" id="perf-clear-btn">Clear & Reset</button>
+          </div>
+          <p style="font-size: 0.84375rem; color: var(--color-text-secondary); margin-bottom: var(--space-3);">
+            Type continuously in the field below to observe real-time latency measurements:
+          </p>
+          <textarea id="perf-test-input" class="perf-typing-input" placeholder="Type a long property description here (e.g. 'Expansive 4 BHK penthouse with dual-aspect panoramic golf course vistas...')" aria-label="Benchmarking input"></textarea>
+
+          <!-- Simulated Dependent Fields Container -->
+          <div style="margin-top: var(--space-4);">
+            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 4px;">
+              Simulated 40 Dependent Layout Elements:
+            </div>
+            <div class="simulated-dependents-box" id="simulated-dependents-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry Meters -->
+        <div class="sandbox-box">
+          <div class="sandbox-box-header">
+            <h3 class="sandbox-box-title">Live Telemetry (performance.now())</h3>
+            <span class="badge badge-verified">Live Browser Session</span>
+          </div>
+
+          <div class="telemetry-metrics-grid">
+            <div class="telemetry-tile">
+              <span class="telemetry-label">Last Keystroke Processing</span>
+              <div class="telemetry-number" id="telemetry-last-latency">0.000</div>
+              <span class="telemetry-unit">milliseconds (ms)</span>
+            </div>
+
+            <div class="telemetry-tile">
+              <span class="telemetry-label">Mean Input Processing Time</span>
+              <div class="telemetry-number" id="telemetry-avg-latency">0.000</div>
+              <span class="telemetry-unit">average ms per event</span>
+            </div>
+
+            <div class="telemetry-tile">
+              <span class="telemetry-label">Peak Input Latency</span>
+              <div class="telemetry-number" id="telemetry-max-latency" style="color: var(--color-error);">0.000</div>
+              <span class="telemetry-unit">maximum spike (ms)</span>
+            </div>
+
+            <div class="telemetry-tile">
+              <span class="telemetry-label">DOM Elements Mutated</span>
+              <div class="telemetry-number" id="telemetry-dom-count">0</div>
+              <span class="telemetry-unit">total element writes</span>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-5); padding: var(--space-4); background-color: var(--color-surface-subtle); border-radius: var(--radius-sm); font-size: 0.8125rem; color: var(--color-text-secondary); line-height: 1.5;">
+            <strong>Technical Note:</strong> Measurements are recorded strictly via <code>performance.now()</code> before and after DOM tree alterations. Notice how switching to <em>Debounced</em> or <em>rAF Batched</em> dramatically reduces average main-thread blocking time during fast typing sequences.
+          </div>
+        </div>
+      </div>
+
+      <!-- Latency History Table -->
+      <section class="perf-log-card" aria-label="Keystroke Event Log">
+        <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: var(--space-4);">Recent Keystroke Telemetry Log</h3>
+        <div class="table-responsive">
+          <table class="log-table">
+            <thead>
+              <tr>
+                <th>Event #</th>
+                <th>Measured Processing Time</th>
+                <th>Dependent Writes</th>
+                <th>Active Mode</th>
+                <th>Client Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="perf-log-tbody">
+              <tr>
+                <td colspan="5" style="text-align: center; color: var(--color-text-muted); padding: 1.5rem;">
+                  No keystrokes recorded yet. Start typing in the sandbox above.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Reusable Shared Footer Mount -->
+  <div id="footer-mount"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/performance.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.PerformanceBenchmarker) {
+        window.PerformanceBenchmarker.init();
+      }
+    });
+  </script>
+</body>
+</html>
