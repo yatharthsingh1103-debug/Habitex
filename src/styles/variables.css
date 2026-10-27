@@ -1,0 +1,96 @@
+/* ==========================================================================
+   DESIGN TOKENS — BLUE REAL-ESTATE ARCHITECTURAL PALETTE
+   Deep navy: #0B1F33
+   Ocean blue: #155E8A
+   Steel blue: #4D86A8
+   Powder blue: #DCEBF3
+   Ice white: #F5F8FA
+   Accent: Sand Gold #D19A5A
+   ========================================================================== */
+
+:root {
+  /* Core Color System */
+  --color-background: #F5F8FA; /* Ice white */
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #EDF4F8; /* Soft powder wash */
+  --color-surface-muted: #DCEBF3; /* Powder blue */
+
+  /* Charcoal & Deep Navy Typography */
+  --color-text: #0B1F33; /* Deep navy */
+  --color-text-secondary: #2C4863;
+  --color-text-muted: #547794; /* Steel blue muted */
+  --color-text-light: #F5F8FA; /* Ice white */
+
+  /* Primary Brand: Deep Navy & Ocean Blue */
+  --color-primary: #0B1F33; /* Deep navy */
+  --color-primary-hover: #155E8A; /* Ocean blue */
+  --color-primary-brand: #155E8A; /* Ocean blue */
+  --color-primary-light: #DCEBF3; /* Powder blue */
+  --color-primary-subtle: rgba(21, 94, 138, 0.08);
+
+  /* Secondary: Steel Blue */
+  --color-secondary: #4D86A8; /* Steel blue */
+  --color-secondary-hover: #366D8E;
+  --color-secondary-light: #EBF3F7;
+  --color-secondary-subtle: rgba(77, 134, 168, 0.12);
+
+  /* Accent: Sand Gold / Architectural Warmth */
+  --color-accent: #D19A5A;
+  --color-accent-hover: #B88142;
+  --color-accent-subtle: #FAF4EB;
+
+  /* Borders & Dividers */
+  --color-border: #CFE0EB;
+  --color-border-subtle: #E2ECF2;
+  --color-border-focus: #155E8A;
+  --color-divider: #DCEBF3;
+
+  /* Functional Status */
+  --color-success: #177245;
+  --color-success-bg: #EAF5EF;
+  --color-warning: #B45309;
+  --color-warning-bg: #FEF3C7;
+  --color-error: #B91C1C;
+  --color-error-bg: #FEE2E2;
+  --color-info: #155E8A;
+  --color-info-bg: #EDF5F9;
+
+  /* Subtle Ambient Shadows */
+  --shadow-xs: 0 1px 2px rgba(11, 31, 51, 0.04);
+  --shadow-sm: 0 2px 4px rgba(11, 31, 51, 0.06);
+  --shadow-md: 0 4px 12px rgba(11, 31, 51, 0.08);
+  --shadow-lg: 0 12px 28px rgba(11, 31, 51, 0.11);
+  --shadow-xl: 0 20px 40px rgba(11, 31, 51, 0.14);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+
+  /* Layout */
+  --container-max: 1240px;
+  --container-form: 880px;
+  --header-height: 72px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}

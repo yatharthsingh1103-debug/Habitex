@@ -1,0 +1,408 @@
+/* ==========================================================================
+   FORM STYLES — CONTROLLED INPUTS, 8-SECTION STEPPER, VALIDATION, DRAG & DROP
+   ========================================================================== */
+
+/* Form Page Wrapper */
+.form-page-layout {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+.form-page-header {
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+
+.form-page-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.form-page-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Stepper Navigation */
+.form-stepper {
+  display: flex;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-xs);
+}
+
+.step-indicator-item {
+  flex: 1;
+  min-width: 100px;
+  padding: var(--space-4) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  background: transparent;
+  border-right: 1px solid var(--color-border-subtle);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+.step-indicator-item:last-child {
+  border-right: none;
+}
+.step-indicator-item:hover {
+  background: var(--color-surface-subtle);
+}
+
+.step-indicator-item.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary-brand);
+}
+
+.step-indicator-item.completed {
+  color: var(--color-success);
+}
+
+.step-badge-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--color-border);
+  color: var(--color-text);
+}
+.step-indicator-item.active .step-badge-num {
+  background: var(--color-primary-brand);
+  color: #FFFFFF;
+}
+.step-indicator-item.completed .step-badge-num {
+  background: var(--color-success);
+  color: #FFFFFF;
+}
+
+/* Draft Autosave Banner */
+.draft-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-6);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.draft-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.draft-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+}
+
+/* Wizard Form Card */
+.form-wizard-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-pane-header {
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--space-6);
+}
+
+.section-pane-title {
+  font-size: 1.35rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.section-pane-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+/* Form Grids */
+.form-grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.form-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+/* Form Field Components */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.required-mark {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.925rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-subtle);
+}
+
+.form-input.has-error, .form-select.has-error, .form-textarea.has-error {
+  border-color: var(--color-error);
+  background-color: #FEF2F2;
+}
+
+.form-hint {
+  font-size: 0.775rem;
+  color: var(--color-text-muted);
+}
+
+.field-error-msg {
+  font-size: 0.775rem;
+  color: var(--color-error);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Selectable Pills (Radio / Chips) */
+.selectable-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill-option-label {
+  cursor: pointer;
+}
+.pill-option-label input[type="radio"],
+.pill-option-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pill-option-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+.pill-option-label:hover .pill-option-chip {
+  border-color: var(--color-secondary);
+  background: var(--color-surface-subtle);
+}
+.pill-option-label input:checked + .pill-option-chip {
+  background: var(--color-primary-brand);
+  border-color: var(--color-primary-brand);
+  color: #FFFFFF;
+}
+
+/* Quantity Steppers (Furnishing inventory) */
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.qty-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.qty-btn:hover {
+  background: var(--color-border);
+}
+
+.qty-display {
+  width: 44px;
+  text-align: center;
+  font-size: 0.925rem;
+  font-weight: 700;
+}
+
+/* Amenities Checkbox Grid */
+.amenities-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-3);
+}
+
+.amenity-checkbox-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+.amenity-checkbox-card:hover {
+  border-color: var(--color-secondary);
+  background: var(--color-surface-subtle);
+}
+.amenity-checkbox-card.selected {
+  border-color: var(--color-primary-brand);
+  background: var(--color-primary-light);
+  color: var(--color-primary-brand);
+  font-weight: 600;
+}
+
+/* Image Upload Dropzone */
+.image-dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  background: var(--color-surface-subtle);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.image-dropzone:hover, .image-dropzone.drag-active {
+  border-color: var(--color-primary-brand);
+  background: var(--color-primary-light);
+}
+
+.dropzone-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-3);
+  color: var(--color-secondary);
+}
+
+.image-previews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.image-preview-item {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
+}
+
+.image-preview-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(185, 28, 28, 0.9);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.cover-badge {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+/* Form Actions Stepper Controls */
+.wizard-nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}

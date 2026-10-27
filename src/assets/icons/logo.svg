@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="habitexGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5B275" />
+      <stop offset="100%" stop-color="#B88142" />
+    </linearGradient>
+    <linearGradient id="habitexTealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A433F" />
+      <stop offset="100%" stop-color="#122E2B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base Rounded Shield / Tile -->
+  <rect width="120" height="120" rx="26" fill="url(#habitexTealGrad)" />
+  <rect x="2" y="2" width="116" height="116" rx="24" fill="none" stroke="#5F8178" stroke-width="1.5" stroke-opacity="0.35"/>
+
+  <!-- Architectural Pediment / Pitched Roof Canopy -->
+  <path d="M 30 48 L 60 24 L 90 48" fill="none" stroke="url(#habitexGoldGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Compass Star / Discovery Beacon -->
+  <path d="M 60 33 L 63.5 40 L 70 41.5 L 63.5 43 L 60 50 L 56.5 43 L 50 41.5 L 56.5 40 Z" fill="#D19A5A" />
+
+  <!-- The Architectural 'H' Monogram -->
+  <!-- Left Pillar -->
+  <rect x="34" y="52" width="9" height="42" rx="4.5" fill="#F8FAF8" />
+  <!-- Right Pillar -->
+  <rect x="77" y="52" width="9" height="42" rx="4.5" fill="#F8FAF8" />
+  <!-- Crossbeam -->
+  <rect x="34" y="68" width="52" height="8" rx="4" fill="#F8FAF8" />
+
+  <!-- Central Golden Threshold / Welcoming Arch Doorway -->
+  <path d="M 52 94 L 52 82 C 52 76.5 68 76.5 68 82 L 68 94 Z" fill="url(#habitexGoldGrad)" />
+</svg>
